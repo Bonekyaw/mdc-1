@@ -1,5 +1,6 @@
-import { Text, View, StyleSheet, SafeAreaView, Pressable } from "react-native";
+import { Text, View, StyleSheet, Pressable } from "react-native";
 import React, { useState } from "react";
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function HomeScreen() {
   return (
