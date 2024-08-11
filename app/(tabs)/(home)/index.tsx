@@ -1,9 +1,16 @@
 import { Text, View, StyleSheet, Pressable } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Link, Stack, useNavigation } from "expo-router";
 
 export default function HomeScreen() {
   const [count, setCount] = useState(0);
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    navigation.setOptions({ headerShown: false });
+  }, [navigation]);
+
   return (
     <SafeAreaView>
       <View style={styles.container}>
@@ -25,6 +32,8 @@ export default function HomeScreen() {
           <Text style={styles.btnText}>Decrease</Text>
         </Pressable>
       </View>
+      <Link href="../../product">Go to Product Tab</Link>
+      <Link href="detail">Go to Detail Screen</Link>
     </SafeAreaView>
   );
 }
