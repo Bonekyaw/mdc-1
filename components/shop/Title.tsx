@@ -22,7 +22,9 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginHorizontal: 20,
+    marginTop: 20,
+    marginBottom: 15,
+    marginRight: 20,
   },
   category: {
     fontSize: 16,
@@ -34,7 +36,7 @@ const styles = StyleSheet.create({
   },
 });
 
-// export type titleProps = {
+// type titleProps = {
 //   title: string;
 //   action: string;
 // };

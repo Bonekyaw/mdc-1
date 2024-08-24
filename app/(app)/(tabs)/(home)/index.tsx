@@ -1,11 +1,22 @@
-import { View, Text, StyleSheet, Dimensions, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Pressable,
+  FlatList,
+} from "react-native";
 import React, { useEffect } from "react";
 import { Link, useNavigation } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Image } from "expo-image";
+import { FlashList } from "@shopify/flash-list";
 
 import Cart from "@/components/shop/Cart";
 import Title from "@/components/shop/Title";
+import Category from "@/components/shop/Category";
+import Product from "@/components/shop/Product";
+import { categories, products } from "@/data";
 
 export default function HomeScreen() {
   const { width, height } = Dimensions.get("window");
@@ -41,8 +52,24 @@ export default function HomeScreen() {
         contentFit="cover"
         transition={1000}
       />
-      <View style={{ marginTop: 17 }}>
-        <Title title="Shop By Category" action="See All"/>
+      <View style={{ marginLeft: 20 }}>
+        <Title title="Shop By Category" action="See All" />
+        <FlashList
+          data={categories}
+          horizontal
+          renderItem={({ item }) => <Category {...item} />}
+          estimatedItemSize={80}
+          showsHorizontalScrollIndicator={false}
+        />
+        <Text>{""}</Text>
+        <Title title="Recommended for You" action="See All" />
+        <FlashList
+          data={products.manShirt}
+          horizontal
+          renderItem={({ item }) => <Product {...item} />}
+          estimatedItemSize={80}
+          showsHorizontalScrollIndicator={false}
+        />
       </View>
     </SafeAreaView>
   );
