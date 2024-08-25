@@ -1,5 +1,4 @@
 import { Pressable, Text, StyleSheet } from "react-native";
-import React from "react";
 import { Image } from "expo-image";
 
 const blurhash =
@@ -9,15 +8,19 @@ export default function Category({
   id,
   name,
   image,
+  onSelect,
+  select,
 }: {
   id: number;
   name: string;
   image: any;
+  onSelect: (name: string) => void,
+  select: string,
 }) {
   return (
-    <Pressable style={styles.container}>
+    <Pressable style={styles.container} onPress={() => onSelect(name)}>
       <Image
-        style={styles.image}
+        style={[styles.image, select === name && styles.select]}
         source={image}
         placeholder={{ blurhash }}
         contentFit="cover"
@@ -37,6 +40,11 @@ const styles = StyleSheet.create({
     width: 55,
     height: 55,
     marginBottom: 7,
+  },
+  select: {
+    borderRadius: 27,
+    borderColor: 'orange',
+    borderWidth: 2,
   },
   text: {
     fontSize: 12,

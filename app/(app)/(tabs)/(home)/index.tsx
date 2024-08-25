@@ -5,12 +5,14 @@ import {
   Dimensions,
   Pressable,
   FlatList,
+  ScrollView,
 } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigation } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Image } from "expo-image";
 import { FlashList } from "@shopify/flash-list";
+import { StatusBar } from "expo-status-bar";
 
 import Cart from "@/components/shop/Cart";
 import Title from "@/components/shop/Title";
@@ -21,10 +23,16 @@ import { categories, products } from "@/data";
 export default function HomeScreen() {
   const { width, height } = Dimensions.get("window");
   const navigation = useNavigation();
+  const [select, setSelect] = useState("Men");
+  const [data, setData] = useState(products);
 
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
   }, [navigation]);
+
+  const onSelectHandler = (name: string) => {
+    setSelect(name);
+  };
 
   const blurhash =
     "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
@@ -32,6 +40,7 @@ export default function HomeScreen() {
   return (
     <SafeAreaView style={{ minHeight: height, backgroundColor: "#ffffff" }}>
       <View style={styles.container}>
+        <StatusBar style="dark" />
         <Pressable>
           <Image
             style={styles.image}
@@ -45,32 +54,45 @@ export default function HomeScreen() {
           <Cart />
         </Pressable>
       </View>
-      <Image
-        style={styles.banner}
-        source={require("@/assets/images/shop/banner6.png")}
-        placeholder={{ blurhash }}
-        contentFit="cover"
-        transition={1000}
-      />
-      <View style={{ marginLeft: 20 }}>
-        <Title title="Shop By Category" action="See All" />
-        <FlashList
-          data={categories}
-          horizontal
-          renderItem={({ item }) => <Category {...item} />}
-          estimatedItemSize={80}
-          showsHorizontalScrollIndicator={false}
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Image
+          style={styles.banner}
+          source={require("@/assets/images/shop/banner6.png")}
+          placeholder={{ blurhash }}
+          contentFit="cover"
+          transition={1000}
         />
-        <Text>{""}</Text>
-        <Title title="Recommended for You" action="See All" />
-        <FlashList
-          data={products.Men}
-          horizontal
-          renderItem={({ item }) => <Product {...item} />}
-          estimatedItemSize={80}
-          showsHorizontalScrollIndicator={false}
-        />
-      </View>
+        <View style={{ marginLeft: 20 }}>
+          <Title title="Shop By Category" action="See All" />
+          <FlashList
+            data={categories}
+            extraData={select}
+            horizontal
+            renderItem={({ item }) => (
+              <Category {...item} onSelect={onSelectHandler} select={select} />
+            )}
+            estimatedItemSize={80}
+            showsHorizontalScrollIndicator={false}
+          />
+          <Text>{""}</Text>
+          <Title title="Recommended for You" action="See All" />
+          <FlashList
+            data={data[select as keyof typeof data]}
+            horizontal
+            renderItem={({ item }) => <Product {...item} />}
+            estimatedItemSize={80}
+            showsHorizontalScrollIndicator={false}
+          />
+          <Title title="Popular Lists for You" action="See All" />
+          <FlashList
+            data={data[select as keyof typeof data]}
+            horizontal
+            renderItem={({ item }) => <Product {...item} />}
+            estimatedItemSize={80}
+            showsHorizontalScrollIndicator={false}
+          />
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
