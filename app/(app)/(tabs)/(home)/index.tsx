@@ -64,7 +64,7 @@ export default function HomeScreen() {
         <Text>{""}</Text>
         <Title title="Recommended for You" action="See All" />
         <FlashList
-          data={products.manShirt}
+          data={products.Men}
           horizontal
           renderItem={({ item }) => <Product {...item} />}
           estimatedItemSize={80}

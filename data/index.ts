@@ -1,24 +1,24 @@
-const Woman = require("@/assets/images/woman.png");
-const Man = require("@/assets/images/man.png");
-const Teen = require("@/assets/images/teen.png");
-const Kid = require("@/assets/images/kid.png");
-const Baby = require("@/assets/images/baby.png");
-const Pet = require("@/assets/images/pet.png");
+const Woman = require("@/assets/images/shop/woman.png");
+const Man = require("@/assets/images/shop/man.png");
+const Teen = require("@/assets/images/shop/teen.png");
+const Kid = require("@/assets/images/shop/kid.png");
+const Baby = require("@/assets/images/shop/baby.png");
+const Pet = require("@/assets/images/shop/pet.png");
 
-const t1 = require("@/assets/images/t1.png");
-const t2 = require("@/assets/images/t2.png");
-const t3 = require("@/assets/images/t3.png");
-const t4 = require("@/assets/images/t4.png");
+const t1 = require("@/assets/images/shop/t1.png");
+const t2 = require("@/assets/images/shop/t2.png");
+const t3 = require("@/assets/images/shop/t3.png");
+const t4 = require("@/assets/images/shop/t4.png");
 
-const w1 = require("@/assets/images/w1.png");
-const w2 = require("@/assets/images/w2.png");
-const w3 = require("@/assets/images/w3.png");
-const w4 = require("@/assets/images/w4.png");
-const w5 = require("@/assets/images/w5.png");
+const w1 = require("@/assets/images/shop/w1.png");
+const w2 = require("@/assets/images/shop/w2.png");
+const w3 = require("@/assets/images/shop/w3.png");
+const w4 = require("@/assets/images/shop/w4.png");
+const w5 = require("@/assets/images/shop/w5.png");
 
-const c1 = require("@/assets/images/c1.png");
-const c2 = require("@/assets/images/c2.png");
-const c3 = require("@/assets/images/c3.png");
+const c1 = require("@/assets/images/shop/c1.png");
+const c2 = require("@/assets/images/shop/c2.png");
+const c3 = require("@/assets/images/shop/c3.png");
 
 export const categories = [
   { id: 1, name: "Men", image: Man },
