@@ -7,12 +7,13 @@ import {
   FlatList,
   ScrollView,
 } from "react-native";
-import React, { useEffect, useState } from "react";
-import { Link, useNavigation } from "expo-router";
+import React, { useEffect, useState, useRef } from "react";
+import { Link, useNavigation, useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Image } from "expo-image";
 import { FlashList } from "@shopify/flash-list";
 import { StatusBar } from "expo-status-bar";
+import { useScrollToTop } from "@react-navigation/native";
 
 import Cart from "@/components/shop/Cart";
 import Title from "@/components/shop/Title";
@@ -25,6 +26,9 @@ export default function HomeScreen() {
   const navigation = useNavigation();
   const [select, setSelect] = useState("Men");
   const [data, setData] = useState(products);
+  const scrollRef = useRef<ScrollView>(null);
+  useScrollToTop(scrollRef);
+  const router = useRouter();
 
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
@@ -34,6 +38,17 @@ export default function HomeScreen() {
     setSelect(name);
   };
 
+  const onPressToTop = () => {
+    scrollRef.current?.scrollTo({
+      y: 0,
+      animated: true,
+    });
+  }
+
+  const goToDetail = (id: number) => {
+    router.navigate('/detail');
+  };
+
   const blurhash =
     "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
@@ -41,7 +56,7 @@ export default function HomeScreen() {
     <SafeAreaView style={{ minHeight: height, backgroundColor: "#ffffff" }}>
       <View style={styles.container}>
         <StatusBar style="dark" />
-        <Pressable>
+        <Pressable onPress={onPressToTop}>
           <Image
             style={styles.image}
             source={require("@/assets/images/shop/n.png")}
@@ -50,11 +65,11 @@ export default function HomeScreen() {
             transition={1000}
           />
         </Pressable>
-        <Pressable>
+        <Pressable onPress={() => router.navigate('/cart')}>
           <Cart />
         </Pressable>
       </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false} ref={scrollRef}>
         <Image
           style={styles.banner}
           source={require("@/assets/images/shop/banner6.png")}
@@ -79,7 +94,7 @@ export default function HomeScreen() {
           <FlashList
             data={data[select as keyof typeof data]}
             horizontal
-            renderItem={({ item }) => <Product {...item} />}
+            renderItem={({ item }) => <Product {...item} onCall={goToDetail}/>}
             estimatedItemSize={80}
             showsHorizontalScrollIndicator={false}
           />
@@ -87,7 +102,7 @@ export default function HomeScreen() {
           <FlashList
             data={data[select as keyof typeof data]}
             horizontal
-            renderItem={({ item }) => <Product {...item} />}
+            renderItem={({ item }) => <Product {...item} onCall={goToDetail}/>}
             estimatedItemSize={80}
             showsHorizontalScrollIndicator={false}
           />
@@ -101,6 +116,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     justifyContent: "space-between",
+    marginBottom: 10,
   },
   image: {
     width: 50,
@@ -108,7 +124,6 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   banner: {
-    marginTop: 10,
     width: "100%",
     aspectRatio: 20 / 9,
   },

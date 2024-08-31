@@ -40,12 +40,12 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="notification"
+        name="cart"
         options={{
-          title: "Notification",
+          title: "Cart",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
-              name={focused ? "notifications" : "notifications-outline"}
+              name={focused ? "cart" : "cart-outline"}
               color={color}
             />
           ),

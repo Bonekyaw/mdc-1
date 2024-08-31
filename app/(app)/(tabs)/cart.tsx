@@ -1,10 +1,10 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-export default function Notification() {
+export default function CartScreen() {
   return (
     <View>
-      <Text>notification</Text>
+      <Text>cart</Text>
     </View>
   );
 }
