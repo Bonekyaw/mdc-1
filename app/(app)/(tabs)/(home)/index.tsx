@@ -15,11 +15,17 @@ import { FlashList } from "@shopify/flash-list";
 import { StatusBar } from "expo-status-bar";
 import { useScrollToTop } from "@react-navigation/native";
 
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { setProduct } from "@/providers/redux/productSlice";
+
 import Cart from "@/components/shop/Cart";
 import Title from "@/components/shop/Title";
 import Category from "@/components/shop/Category";
 import Product from "@/components/shop/Product";
 import { categories, products } from "@/data";
+
+const blurhash =
+"|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
 export default function HomeScreen() {
   const { width, height } = Dimensions.get("window");
@@ -29,6 +35,8 @@ export default function HomeScreen() {
   const scrollRef = useRef<ScrollView>(null);
   useScrollToTop(scrollRef);
   const router = useRouter();
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
@@ -45,12 +53,10 @@ export default function HomeScreen() {
     });
   }
 
-  const goToDetail = (id: number) => {
+  const saveProductToRedux = (item: any) => {
+    dispatch(setProduct(item));
     router.navigate('/detail');
   };
-
-  const blurhash =
-    "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
   return (
     <SafeAreaView style={{ minHeight: height, backgroundColor: "#ffffff" }}>
@@ -94,7 +100,7 @@ export default function HomeScreen() {
           <FlashList
             data={data[select as keyof typeof data]}
             horizontal
-            renderItem={({ item }) => <Product {...item} onCall={goToDetail}/>}
+            renderItem={({ item }) => <Product {...item} onCall={() => saveProductToRedux(item)}/>}
             estimatedItemSize={80}
             showsHorizontalScrollIndicator={false}
           />
@@ -102,7 +108,7 @@ export default function HomeScreen() {
           <FlashList
             data={data[select as keyof typeof data]}
             horizontal
-            renderItem={({ item }) => <Product {...item} onCall={goToDetail}/>}
+            renderItem={({ item }) => <Product {...item} onCall={() => saveProductToRedux(item)}/>}
             estimatedItemSize={80}
             showsHorizontalScrollIndicator={false}
           />

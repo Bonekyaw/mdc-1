@@ -18,7 +18,7 @@ type ProductProps = {
   discount: number;
   image: any;
   favourite: boolean;
-  onCall: (id: number) => void;
+  onCall: () => void;
 };
 
 export default function Product({
@@ -35,7 +35,7 @@ export default function Product({
 }: ProductProps) {
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => onCall(id)}>
+      <Pressable onPress={onCall}>
         <ImageBackground
           source={image}
           style={styles.imageView}
