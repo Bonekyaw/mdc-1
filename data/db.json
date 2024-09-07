@@ -1,0 +1,7 @@
+{
+  "categories": [
+    { "id": 1, "name": "Men", "image": "man.png" },
+    { "id": 2, "name": "Women", "image": "woman.png" },
+    { "id": 3, "name": "Teens", "image": "teen.png" }
+  ]
+}

@@ -75,7 +75,7 @@ export default function HomeScreen() {
           <Cart />
         </Pressable>
       </View>
-      <ScrollView showsVerticalScrollIndicator={false} ref={scrollRef}>
+      <ScrollView showsVerticalScrollIndicator={false} ref={scrollRef} >
         <Image
           style={styles.banner}
           source={require("@/assets/images/shop/banner6.png")}
@@ -112,6 +112,7 @@ export default function HomeScreen() {
             estimatedItemSize={80}
             showsHorizontalScrollIndicator={false}
           />
+          <View style={{ marginBottom: 100}}/>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -123,6 +124,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 10,
+    marginRight: 15,
   },
   image: {
     width: 50,
