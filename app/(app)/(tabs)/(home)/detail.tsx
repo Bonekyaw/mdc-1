@@ -11,6 +11,8 @@ import React from "react";
 import { Stack } from "expo-router";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import BottomSheet, { BottomSheetFlatList, BottomSheetBackdrop } from "@gorhom/bottom-sheet";
+import {Picker} from '@react-native-picker/picker';
 
 import Cart from "@/components/shop/Cart";
 import ViewPager from "@/components/shop/ViewPager";
@@ -239,7 +241,7 @@ const styles = StyleSheet.create({
     gap: 17,
   },
   button: {
-    width: (width * 2) / 5,
+    width: width / 2.5,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
