@@ -1,45 +1,56 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  createAsyncThunk,
+  createEntityAdapter,
+} from "@reduxjs/toolkit";
+import { fetchApi } from "@/api";
+import { ProductType } from "@/types";
 
-type Product = {
-  id: number,
-  brand: string,
-  title: string,
-  star: number,
-  quantity: number,
-  price: number,
-  discount: number,
-  image: any,
-  favourite: boolean,
-}
-interface ProductState {
-  product: Product;
-}
+export const fetchProducts = createAsyncThunk("products/fetchAll", async () => {
+  const response = await fetchApi("products");
+  return response;
+});
 
-const initialState: ProductState = {
-  product: {
-    id: 1,
-    brand: "",
-    title: "",
-    star: 0,
-    quantity: 0,
-    price: 0,
-    discount: 0,
-    image: "",
-    favourite: false,
-  },
-};
+export const updateFavourite = createAsyncThunk(
+  "products/updateOne",
+  async ({ id, data }: { id: string; data: any }) => {
+    const response = await fetchApi(`products/${id}`, "PATCH", "_", data);
+    return response;
+  }
+);
 
-const productSlice = createSlice({
+export const productsAdapter = createEntityAdapter<ProductType>();
+
+const initialState = productsAdapter.getInitialState({ loading: false });
+
+export const productSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    setProduct: (state, action) => {
-      state.product = action.payload;
-    },
-    // Other reducers go here
+    // removeProduct: productsAdapter.removeOne,
+    updateProduct: productsAdapter.updateOne,
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchProducts.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(fetchProducts.fulfilled, (state, action) => {
+      productsAdapter.upsertMany(state, action.payload);
+
+      state.loading = false;
+    });
   },
 });
 
-export const { setProduct } = productSlice.actions;
+const reducer = productSlice.reducer;
+export default reducer;
 
-export default productSlice.reducer;
+export const { updateProduct } = productSlice.actions;
+
+export const {
+  selectById: selectProductById,
+  selectIds: selectProductIds,
+  selectEntities: selectProductEntities,
+  selectAll: selectAllProducts,
+  selectTotal: selectTotalProducts,
+} = productsAdapter.getSelectors((state: any) => state.products);

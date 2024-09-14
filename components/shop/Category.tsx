@@ -11,16 +11,16 @@ export default function Category({
   onSelect,
   select,
 }: {
-  id: number;
+  id: string;
   name: string;
   image: any;
   onSelect: (name: string) => void,
   select: string,
 }) {
   return (
-    <Pressable style={styles.container} onPress={() => onSelect(name)}>
+    <Pressable style={styles.container} onPress={() => onSelect(id)}>
       <Image
-        style={[styles.image, select === name && styles.select]}
+        style={[styles.image, select === id && styles.select]}
         source={image}
         placeholder={{ blurhash }}
         contentFit="cover"

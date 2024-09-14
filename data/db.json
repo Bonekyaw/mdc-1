@@ -1,7 +1,387 @@
 {
-  "categories": [
-    { "id": 1, "name": "Men", "image": "man.png" },
-    { "id": 2, "name": "Women", "image": "woman.png" },
-    { "id": 3, "name": "Teens", "image": "teen.png" }
+  "requiredInfo": {
+    "categories": [
+      {
+        "id": "uuid1",
+        "name": "Men",
+        "image": "man.png"
+      },
+      {
+        "id": "uuid2",
+        "name": "Women",
+        "image": "woman.png"
+      },
+      {
+        "id": "uuid3",
+        "name": "Teens",
+        "image": "teen.png"
+      },
+      {
+        "id": "uuid4",
+        "name": "Kids",
+        "image": "kid.png"
+      },
+      {
+        "id": "uuid5",
+        "name": "Babies",
+        "image": "baby.png"
+      },
+      {
+        "id": "uuid6",
+        "name": "Pets",
+        "image": "pet.png"
+      },
+      {
+        "id": "uuid7",
+        "name": "Women",
+        "image": "woman.png"
+      },
+      {
+        "id": "uuid8",
+        "name": "Men",
+        "image": "man.png"
+      },
+      {
+        "id": "uuid9",
+        "name": "Teens",
+        "image": "teen.png"
+      },
+      {
+        "id": "uuid10",
+        "name": "Kids",
+        "image": "kid.png"
+      },
+      {
+        "id": "uuid11",
+        "name": "Babies",
+        "image": "baby.png"
+      },
+      {
+        "id": "uuid12",
+        "name": "Pets",
+        "image": "pet.png"
+      }
+    ],
+    "colors": [
+      {
+        "id": "uuid1",
+        "name": "black",
+        "bgColor": "#000000",
+        "stock": true
+      },
+      {
+        "id": "uuid2",
+        "name": "blue",
+        "bgColor": "#2B4CC3",
+        "stock": true
+      },
+      {
+        "id": "uuid3",
+        "name": "purple",
+        "bgColor": "#6680C2",
+        "stock": false
+      },
+      {
+        "id": "uuid4",
+        "name": "white",
+        "bgColor": "#ffffff",
+        "stock": true
+      }
+    ],
+    "sizes": [
+      {
+        "id": "uuid5",
+        "name": "XS",
+        "stock": false
+      },
+      {
+        "id": "uuid6",
+        "name": "S",
+        "stock": true
+      },
+      {
+        "id": "uuid7",
+        "name": "M",
+        "stock": true
+      },
+      {
+        "id": "uuid8",
+        "name": "L",
+        "stock": false
+      },
+      {
+        "id": "uuid9",
+        "name": "XL",
+        "stock": true
+      },
+      {
+        "id": "uuid10",
+        "name": "XXL",
+        "stock": true
+      }
+    ],
+    "sample": [
+      {
+        "key": 1,
+        "image": "c1.png"
+      },
+      {
+        "key": 2,
+        "image": "c2.png"
+      },
+      {
+        "key": 3,
+        "image": "c3.png"
+      }
+    ]
+  },
+  "products": [
+    {
+      "id": "uuid1",
+      "categories_id": "uuid1",
+      "brand": "H&M",
+      "title": "Oversized Fit Printed Mesh T-Shirt",
+      "star": 4.9,
+      "quantity": 136,
+      "price": 295.5,
+      "discount": 550,
+      "image": "t1.png",
+      "favourite": true,
+      "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
+    },
+    {
+      "id": "uuid2",
+      "categories_id": "uuid1",
+      "brand": "H&M",
+      "title": "Loose Fit T-Shirt",
+      "star": 4.7,
+      "quantity": 201,
+      "price": 199.5,
+      "discount": 0,
+      "image": "t3.png",
+      "favourite": false,
+      "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
+    },
+    {
+      "id": "uuid3",
+      "categories_id": "uuid2",
+      "brand": "H&M",
+      "title": "Regular Fit Linen",
+      "star": 4.8,
+      "quantity": 127,
+      "price": 255,
+      "discount": 0,
+      "image": "t2.png",
+      "favourite": false,
+      "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
+    },
+    {
+      "id": "uuid4",
+      "categories_id": "uuid1",
+      "brand": "H&M",
+      "title": "DryMove Fit",
+      "star": 4.5,
+      "quantity": 234,
+      "price": 220,
+      "discount": 0,
+      "image": "t4.png",
+      "favourite": false,
+      "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
+    },
+    {
+      "id": "uuid5",
+      "categories_id": "uuid2",
+      "brand": "H&M",
+      "title": "Oversized Fit Printed Mesh T-Shirt",
+      "star": 4.9,
+      "quantity": 136,
+      "price": 295,
+      "discount": 550,
+      "image": "w1.png",
+      "favourite": false,
+      "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
+    },
+    {
+      "id": "uuid6",
+      "categories_id": "uuid2",
+      "brand": "H&M",
+      "title": "Regular Fit Linen",
+      "star": 4.8,
+      "quantity": 127,
+      "price": 255,
+      "discount": 0,
+      "image": "w2.png",
+      "favourite": false,
+      "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
+    },
+    {
+      "id": "uuid7",
+      "categories_id": "uuid1",
+      "brand": "H&M",
+      "title": "DryMove Fit",
+      "star": 4.5,
+      "quantity": 234,
+      "price": 220,
+      "discount": 0,
+      "image": "w4.png",
+      "favourite": false,
+      "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
+    },
+    {
+      "id": "uuid8",
+      "categories_id": "uuid1",
+      "brand": "H&M",
+      "title": "Loose Fit T-Shirt",
+      "star": 4.5,
+      "quantity": 234,
+      "price": 220,
+      "discount": 0,
+      "image": "w5.png",
+      "favourite": false,
+      "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
+    },
+    {
+      "id": "uuid9",
+      "categories_id": "uuid2",
+      "brand": "H&M",
+      "title": "Oversized Fit Printed Mesh T-Shirt",
+      "star": 4.9,
+      "quantity": 136,
+      "price": 295.5,
+      "discount": 550,
+      "image": "t1.png",
+      "favourite": true,
+      "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
+    },
+    {
+      "id": "uuid10",
+      "categories_id": "uuid2",
+      "brand": "H&M",
+      "title": "Loose Fit T-Shirt",
+      "star": 4.7,
+      "quantity": 201,
+      "price": 199.5,
+      "discount": 0,
+      "image": "t3.png",
+      "favourite": false,
+      "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
+    },
+    {
+      "id": "uuid11",
+      "categories_id": "uuid3",
+      "brand": "H&M",
+      "title": "Regular Fit Linen",
+      "star": 4.8,
+      "quantity": 127,
+      "price": 255,
+      "discount": 0,
+      "image": "t2.png",
+      "favourite": false,
+      "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
+    },
+    {
+      "id": "uuid12",
+      "categories_id": "uuid3",
+      "brand": "H&M",
+      "title": "DryMove Fit",
+      "star": 4.5,
+      "quantity": 234,
+      "price": 220,
+      "discount": 0,
+      "image": "t4.png",
+      "favourite": false,
+      "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
+    },
+    {
+      "id": "uuid13",
+      "categories_id": "uuid4",
+      "brand": "H&M",
+      "title": "Oversized Fit Printed Mesh T-Shirt",
+      "star": 4.9,
+      "quantity": 136,
+      "price": 295,
+      "discount": 550,
+      "image": "w1.png",
+      "favourite": false,
+      "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
+    },
+    {
+      "id": "uuid14",
+      "categories_id": "uuid4",
+      "brand": "H&M",
+      "title": "Regular Fit Linen",
+      "star": 4.8,
+      "quantity": 127,
+      "price": 255,
+      "discount": 0,
+      "image": "w2.png",
+      "favourite": false,
+      "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
+    },
+    {
+      "id": "uuid15",
+      "categories_id": "uuid5",
+      "brand": "H&M",
+      "title": "DryMove Fit",
+      "star": 4.5,
+      "quantity": 234,
+      "price": 220,
+      "discount": 0,
+      "image": "w4.png",
+      "favourite": false,
+      "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
+    },
+    {
+      "id": "uuid16",
+      "categories_id": "uuid5",
+      "brand": "H&M",
+      "title": "Loose Fit T-Shirt",
+      "star": 4.5,
+      "quantity": 234,
+      "price": 220,
+      "discount": 0,
+      "image": "w5.png",
+      "favourite": false,
+      "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
+    },
+    {
+      "id": "uuid17",
+      "categories_id": "uuid6",
+      "brand": "H&M",
+      "title": "Regular Fit Linen",
+      "star": 4.8,
+      "quantity": 127,
+      "price": 255,
+      "discount": 0,
+      "image": "w2.png",
+      "favourite": false,
+      "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
+    },
+    {
+      "id": "uuid18",
+      "categories_id": "uuid6",
+      "brand": "H&M",
+      "title": "DryMove Fit",
+      "star": 4.5,
+      "quantity": 234,
+      "price": 220,
+      "discount": 0,
+      "image": "w4.png",
+      "favourite": false,
+      "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
+    },
+    {
+      "id": "uuid19",
+      "categories_id": "uuid6",
+      "brand": "H&M",
+      "title": "Loose Fit T-Shirt",
+      "star": 4.5,
+      "quantity": 234,
+      "price": 220,
+      "discount": 0,
+      "image": "w5.png",
+      "favourite": false,
+      "description": "a long- or short-sleeved garment for the upper part of the body, usually lightweight and having a collar and a front opening. an undergarment of cotton, or other material, for the upper part of the body. a shirtwaist."
+    }
   ]
 }

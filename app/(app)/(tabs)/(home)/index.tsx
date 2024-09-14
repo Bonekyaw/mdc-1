@@ -16,31 +16,50 @@ import { StatusBar } from "expo-status-bar";
 import { useScrollToTop } from "@react-navigation/native";
 
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
-import { setProduct } from "@/providers/redux/productSlice";
+import {
+  fetchProducts,
+  updateProduct,
+  selectProductById,
+  selectAllProducts,
+} from "@/providers/redux/productSlice";
+import { ProductType, CategoryType } from "@/types";
 
 import Cart from "@/components/shop/Cart";
 import Title from "@/components/shop/Title";
 import Category from "@/components/shop/Category";
 import Product from "@/components/shop/Product";
-import { categories, products } from "@/data";
+import { categories } from "@/data";
 
 const blurhash =
-"|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
+  "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
 export default function HomeScreen() {
   const { width, height } = Dimensions.get("window");
   const navigation = useNavigation();
-  const [select, setSelect] = useState("Men");
-  const [data, setData] = useState(products);
+  const [select, setSelect] = useState("uuid1");
+  // const [data, setData] = useState();
   const scrollRef = useRef<ScrollView>(null);
   useScrollToTop(scrollRef);
   const router = useRouter();
 
   const dispatch = useAppDispatch();
+  const products = useAppSelector(selectAllProducts);
+  const productsLoading = useAppSelector((state) => state.products.loading);
+  // const categories: CategoryType[] = useAppSelector(
+  //   (state) => state.requiredInfo.categories
+  // );
+  const productLists = products.filter(
+    (product) => product.categories_id === select
+  );
 
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
+    dispatch(fetchProducts());
   }, [navigation]);
+
+  if (productsLoading) {
+    return <Text>Loading...</Text>;
+  }
 
   const onSelectHandler = (name: string) => {
     setSelect(name);
@@ -51,11 +70,13 @@ export default function HomeScreen() {
       y: 0,
       animated: true,
     });
-  }
+  };
 
-  const saveProductToRedux = (item: any) => {
-    dispatch(setProduct(item));
-    router.navigate('/detail');
+  const saveProductToRedux = (id: string) => {
+    router.push({
+      pathname: "/detail",
+      params: { id }, // Data passed as query parameters
+    });
   };
 
   return (
@@ -71,11 +92,11 @@ export default function HomeScreen() {
             transition={1000}
           />
         </Pressable>
-        <Pressable onPress={() => router.navigate('/cart')}>
+        <Pressable onPress={() => router.navigate("/cart")}>
           <Cart />
         </Pressable>
       </View>
-      <ScrollView showsVerticalScrollIndicator={false} ref={scrollRef} >
+      <ScrollView showsVerticalScrollIndicator={false} ref={scrollRef}>
         <Image
           style={styles.banner}
           source={require("@/assets/images/shop/banner6.png")}
@@ -98,21 +119,25 @@ export default function HomeScreen() {
           <Text>{""}</Text>
           <Title title="Recommended for You" action="See All" />
           <FlashList
-            data={data[select as keyof typeof data]}
+            data={productLists}
             horizontal
-            renderItem={({ item }) => <Product {...item} onCall={() => saveProductToRedux(item)}/>}
+            renderItem={({ item }) => (
+              <Product {...item} onCall={() => saveProductToRedux(item.id)} />
+            )}
             estimatedItemSize={80}
             showsHorizontalScrollIndicator={false}
           />
           <Title title="Popular Lists for You" action="See All" />
           <FlashList
-            data={data[select as keyof typeof data]}
+            data={productLists}
             horizontal
-            renderItem={({ item }) => <Product {...item} onCall={() => saveProductToRedux(item)}/>}
+            renderItem={({ item }) => (
+              <Product {...item} onCall={() => saveProductToRedux(item.id)} />
+            )}
             estimatedItemSize={80}
             showsHorizontalScrollIndicator={false}
           />
-          <View style={{ marginBottom: 100}}/>
+          <View style={{ marginBottom: 100 }} />
         </View>
       </ScrollView>
     </SafeAreaView>
