@@ -20,6 +20,7 @@ type ProductProps = {
   image: any;
   favourite: boolean;
   onCall: () => void;
+  onAdd: () => void;
 };
 
 export default function Product({
@@ -33,6 +34,7 @@ export default function Product({
   image,
   favourite,
   onCall,
+  onAdd,
 }: ProductProps) {
   return (
     <View style={styles.container}>
@@ -42,9 +44,9 @@ export default function Product({
           style={styles.imageView}
           imageStyle={styles.image}
         >
-          <Pressable>
+          <Pressable onPress={onAdd}>
             <View style={styles.heartContainer}>
-              <Ionicons name="heart-outline" size={18} color="#E66F2D" />
+              <Ionicons name={favourite ? "heart" : "heart-outline"} size={18} color="#E66F2D" />
             </View>
           </Pressable>
         </ImageBackground>

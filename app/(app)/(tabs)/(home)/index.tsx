@@ -18,11 +18,13 @@ import { useScrollToTop } from "@react-navigation/native";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import {
   fetchProducts,
+  updateFavouriteApi,
   updateProduct,
   selectProductById,
   selectAllProducts,
 } from "@/providers/redux/productSlice";
 import { ProductType, CategoryType } from "@/types";
+import Toast from "react-native-root-toast";
 
 import Cart from "@/components/shop/Cart";
 import Title from "@/components/shop/Title";
@@ -45,6 +47,7 @@ export default function HomeScreen() {
   const dispatch = useAppDispatch();
   const products = useAppSelector(selectAllProducts);
   const productsLoading = useAppSelector((state) => state.products.loading);
+  const errorStatus = useAppSelector((state) => state.products.error);
   // const categories: CategoryType[] = useAppSelector(
   //   (state) => state.requiredInfo.categories
   // );
@@ -59,6 +62,17 @@ export default function HomeScreen() {
 
   if (productsLoading) {
     return <Text>Loading...</Text>;
+  }
+
+  if (errorStatus) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>Network Connection Failed!</Text>
+        <Pressable onPress={() => dispatch(fetchProducts())} style={styles.btnError}>
+          <Text>Try again</Text>
+        </Pressable>
+      </View>
+    );
   }
 
   const onSelectHandler = (name: string) => {
@@ -77,6 +91,19 @@ export default function HomeScreen() {
       pathname: "/detail",
       params: { id }, // Data passed as query parameters
     });
+  };
+
+  const addToFavourite = async (item: ProductType) => {
+    try {
+      const data = { id: item.id, data: { favourite: !item.favourite } };
+      // const data = { id: "abc", data: { favourite: !item.favourite } };
+      await dispatch(updateFavouriteApi(data)).unwrap();
+    } catch (error: any) {
+      // console.log("Error-----", error);
+      Toast.show(error, {
+        duration: Toast.durations.SHORT,
+      });
+    }
   };
 
   return (
@@ -122,7 +149,7 @@ export default function HomeScreen() {
             data={productLists}
             horizontal
             renderItem={({ item }) => (
-              <Product {...item} onCall={() => saveProductToRedux(item.id)} />
+              <Product {...item} onCall={() => saveProductToRedux(item.id)} onAdd={() => addToFavourite(item)}/>
             )}
             estimatedItemSize={80}
             showsHorizontalScrollIndicator={false}
@@ -132,7 +159,7 @@ export default function HomeScreen() {
             data={productLists}
             horizontal
             renderItem={({ item }) => (
-              <Product {...item} onCall={() => saveProductToRedux(item.id)} />
+              <Product {...item} onCall={() => saveProductToRedux(item.id)} onAdd={() => addToFavourite(item)}/>
             )}
             estimatedItemSize={80}
             showsHorizontalScrollIndicator={false}
@@ -159,5 +186,13 @@ const styles = StyleSheet.create({
   banner: {
     width: "100%",
     aspectRatio: 20 / 9,
+  },
+  btnError: {
+    marginTop: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderColor: 'black',
+    borderWidth: 0.5,
+    borderRadius: 5,
   },
 });

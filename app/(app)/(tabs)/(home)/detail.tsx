@@ -8,21 +8,38 @@ import {
   StyleSheet,
 } from "react-native";
 import React from "react";
-import { Stack } from "expo-router";
+import { Stack, useLocalSearchParams } from "expo-router";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import BottomSheet, { BottomSheetFlatList, BottomSheetBackdrop } from "@gorhom/bottom-sheet";
-import {Picker} from '@react-native-picker/picker';
+import BottomSheet, {
+  BottomSheetFlatList,
+  BottomSheetBackdrop,
+} from "@gorhom/bottom-sheet";
+import { Picker } from "@react-native-picker/picker";
 
 import Cart from "@/components/shop/Cart";
 import ViewPager from "@/components/shop/ViewPager";
-import { description, selectItems } from "@/data";
+import { selectItems } from "@/data";
+import { ProductType, Color, Size, Sample } from "@/types";
+import {
+  fetchProducts,
+  updateFavouriteApi,
+  selectProductById,
+  selectProductIds,
+  selectTotalProducts,
+  selectAllProducts,
+  selectProductEntities,
+} from "@/providers/redux/productSlice";
+import Toast from "react-native-root-toast";
 
 const { width, height } = Dimensions.get("window");
-export default function DetailScreen() {
-  // const {id} = useLocalSearchParams();
-  const product = useAppSelector((state) => state.products.product);
 
+export default function DetailScreen() {
+  const { id } = useLocalSearchParams();
+  const dispatch = useAppDispatch();
+  const product = useAppSelector((state) =>
+    selectProductById(state, id as string)
+  );
   const ColorBox = ({
     id,
     name,
@@ -72,6 +89,18 @@ export default function DetailScreen() {
     </Pressable>
   );
 
+  const addToFavourite = async () => {
+    try {
+      const data = { id: product.id, data: { favourite: !product.favourite } };
+      // const data = { id: "abc", data: { favourite: !product.favourite } };
+      await dispatch(updateFavouriteApi(data)).unwrap();
+    } catch (error: any) {
+      Toast.show(error, {
+        duration: Toast.durations.SHORT,
+      });
+    }
+  };
+
   return (
     <View>
       <Stack.Screen
@@ -105,9 +134,9 @@ export default function DetailScreen() {
               <Text style={styles.star}>{product.star}</Text>
               <Text style={styles.quantity}>({product.quantity})</Text>
             </View>
-            <Pressable>
+            <Pressable onPress={addToFavourite}>
               <Ionicons
-                name="heart"
+                name={product?.favourite ? "heart" : "heart-outline"}
                 size={20}
                 color="#E66F2D"
                 style={{ paddingTop: 1 }}
@@ -119,7 +148,7 @@ export default function DetailScreen() {
             <Text style={styles.price}>{product.price.toFixed(2)}</Text>
             <Text style={styles.discount}>{product.discount.toFixed(2)}</Text>
           </View>
-          <Text style={styles.description}>{description}</Text>
+          <Text style={styles.description}>{product.description}</Text>
           <View
             style={
               width > 600
@@ -151,15 +180,11 @@ export default function DetailScreen() {
       </ScrollView>
       <View style={styles.btnContainer}>
         <Pressable style={styles.button}>
-          <Ionicons
-            name="cart-outline"
-            size={20}
-            color="black"
-          />
+          <Ionicons name="cart-outline" size={20} color="black" />
           <Text style={styles.btnText}>ADD TO CART</Text>
         </Pressable>
-        <Pressable style={[styles.button, {backgroundColor: 'black'}]}>
-          <Text style={[styles.btnText, {color: 'white'}]}>BUY NOW</Text>
+        <Pressable style={[styles.button, { backgroundColor: "black" }]}>
+          <Text style={[styles.btnText, { color: "white" }]}>BUY NOW</Text>
         </Pressable>
       </View>
     </View>
@@ -232,27 +257,27 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   btnContainer: {
-    flexDirection: 'row',
-    position: 'absolute',
+    flexDirection: "row",
+    position: "absolute",
     bottom: 10,
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
     gap: 17,
   },
   button: {
     width: width / 2.5,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     gap: 5,
     borderWidth: 0.7,
     paddingVertical: 10,
     paddingHorizontal: 25,
     borderRadius: 7,
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   btnText: {
-    fontWeight: '700', 
+    fontWeight: "700",
   },
 });
