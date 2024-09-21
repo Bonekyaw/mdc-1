@@ -1,12 +1,15 @@
 import { View, Text, StyleSheet } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { useAppSelector } from "@/hooks/useRedux";
+import { selectCount } from "@/providers/redux/cartSlice";
 
 export default function Cart() {
+  const count = useAppSelector(selectCount);
   return (
     <View style={{ flexDirection: 'row' }}>
       <Ionicons name="cart-outline" size={24} color="black" />
       <View style={styles.container}>
-        <Text style={styles.badge}>13</Text>
+        <Text style={styles.badge}>{count}</Text>
       </View>
     </View>
   );

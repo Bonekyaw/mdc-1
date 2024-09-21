@@ -1,5 +1,6 @@
 import { Pressable, Text, StyleSheet } from "react-native";
 import { Image } from "expo-image";
+import { API_URL } from "@/config";
 
 const blurhash =
   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
@@ -14,14 +15,14 @@ export default function Category({
   id: string;
   name: string;
   image: any;
-  onSelect: (name: string) => void,
-  select: string,
+  onSelect: (name: string) => void;
+  select: string;
 }) {
   return (
     <Pressable style={styles.container} onPress={() => onSelect(id)}>
       <Image
         style={[styles.image, select === id && styles.select]}
-        source={image}
+        source={{ uri: API_URL + image }}
         placeholder={{ blurhash }}
         contentFit="cover"
         transition={1000}
@@ -33,7 +34,7 @@ export default function Category({
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
+    alignItems: "center",
     marginRight: 30,
   },
   image: {
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
   },
   select: {
     borderRadius: 27,
-    borderColor: 'orange',
+    borderColor: "orange",
     borderWidth: 2,
   },
   text: {

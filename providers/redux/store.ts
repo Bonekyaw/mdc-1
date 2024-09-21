@@ -7,6 +7,8 @@ import {
 import { setupListeners } from "@reduxjs/toolkit/query";
 
 import productReducer from "./productSlice";
+import requiredInfoReducer from "./requiredInfoSlice";
+import cartReducer from "./cartSlice";
 // import { api } from "./query/apiSlice";
 
 // If you don't use RTK query, store will be like this. So simple!
@@ -14,6 +16,8 @@ import productReducer from "./productSlice";
 export const store = configureStore({
   reducer: {
     products: productReducer,
+    requiredInfo: requiredInfoReducer,
+    carts: cartReducer,
   },
 });
 

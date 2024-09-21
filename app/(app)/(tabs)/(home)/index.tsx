@@ -23,6 +23,7 @@ import {
   selectProductById,
   selectAllProducts,
 } from "@/providers/redux/productSlice";
+import { fetchRequiredInfo } from "@/providers/redux/requiredInfoSlice";
 import { ProductType, CategoryType } from "@/types";
 import Toast from "react-native-root-toast";
 
@@ -30,7 +31,6 @@ import Cart from "@/components/shop/Cart";
 import Title from "@/components/shop/Title";
 import Category from "@/components/shop/Category";
 import Product from "@/components/shop/Product";
-import { categories } from "@/data";
 
 const blurhash =
   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
@@ -48,9 +48,9 @@ export default function HomeScreen() {
   const products = useAppSelector(selectAllProducts);
   const productsLoading = useAppSelector((state) => state.products.loading);
   const errorStatus = useAppSelector((state) => state.products.error);
-  // const categories: CategoryType[] = useAppSelector(
-  //   (state) => state.requiredInfo.categories
-  // );
+  const categories: CategoryType[] = useAppSelector(
+    (state) => state.requiredInfo.categories
+  );
   const productLists = products.filter(
     (product) => product.categories_id === select
   );
@@ -62,6 +62,20 @@ export default function HomeScreen() {
 
   if (productsLoading) {
     return <Text>Loading...</Text>;
+  }
+
+  if (categories.length == 0) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>Network Connection Failed!</Text>
+        <Pressable
+          onPress={() => dispatch(fetchRequiredInfo())}
+          style={styles.btnError}
+        >
+          <Text>Try again</Text>
+        </Pressable>
+      </View>
+    );
   }
 
   if (errorStatus) {
