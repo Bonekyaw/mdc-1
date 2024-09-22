@@ -3,7 +3,7 @@ import { API_URL } from "@/config";
 export const fetchApi = async (
   endpoint: string,
   method = "GET",
-  token = "Hey it's me, baby.",
+  token = "Hey it's me, baby.", // Fake token
   data = {}
 ) => {
   // const url = "http://localhost:4000/products";

@@ -488,7 +488,7 @@ export default function DetailScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    height: "100%",
+    minHeight: "100%",
     backgroundColor: "white",
   },
   detailContiner: {

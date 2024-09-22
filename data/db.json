@@ -1,4 +1,26 @@
 {
+  "users": [
+    {
+      "id": "uuid1",
+      "name": "David22"
+    },
+    {
+      "id": "uuid2",
+      "name": "Beckham5658"
+    },
+    {
+      "id": "uuid3",
+      "name": "Jhon20"
+    },
+    {
+      "id": "uuid4",
+      "name": "Smith"
+    },
+    {
+      "id": "uuid5",
+      "name": "Phone"
+    }
+  ],
   "requiredInfo": {
     "categories": [
       {
