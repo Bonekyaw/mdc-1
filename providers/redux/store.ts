@@ -9,16 +9,17 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import productReducer from "./productSlice";
 import requiredInfoReducer from "./requiredInfoSlice";
 import cartReducer from "./cartSlice";
-// import { api } from "./query/apiSlice";
-
-// If you don't use RTK query, store will be like this. So simple!
+import { apiSlice } from "./query/apiSlice";
 
 export const store = configureStore({
   reducer: {
+    [apiSlice.reducerPath]: apiSlice.reducer,
     products: productReducer,
     requiredInfo: requiredInfoReducer,
     carts: cartReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(apiSlice.middleware),
 });
 
 // const rootReducer = combineReducers({

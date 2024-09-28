@@ -8,13 +8,11 @@ const AuthContext = createContext<{
   signOut: () => void;
   session?: string | null;
   isLoading: boolean;
-  // token?: string | null;
 }>({
   signIn: ({}) => null,
   signOut: () => null,
   session: null,
   isLoading: false,
-  // token: null,
 });
 
 // This hook can be used to access the user info.
@@ -42,15 +40,15 @@ export function SessionProvider({ children }: PropsWithChildren) {
           if (response) {
             // store token and user info into secure storage or mmkv
             setSession("xxx"); // set session string as you like
-            // await SecureStore.setItemAsync("token", response.token); // set Token
+            await SecureStore.setItemAsync("token", "mdc sample token"); // set Token - response.token
           }
         },
-        signOut: () => {
+        signOut: async () => {
+          await SecureStore.deleteItemAsync("token");
           setSession(null);
         },
         session,
         isLoading,
-        // token,
       }}
     >
       {children}
