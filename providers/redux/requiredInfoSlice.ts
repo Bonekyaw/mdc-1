@@ -9,6 +9,10 @@ export const fetchRequiredInfo = createAsyncThunk(
 
     if (!response) {
       return rejectWithValue("Network connection failed. Please try again!");
+    } else if (response.error) {
+      console.log("Response in createAsyncThunk", response);
+
+      return rejectWithValue(response.message);
     }
     return response;
   }

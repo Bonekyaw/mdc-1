@@ -5,9 +5,12 @@ async function fetchWithRetry(url: string, options = {}, retries = 5) {
   try {
     // Try making the API call
     const response = await fetch(url, options);
+    // console.log("Response in api", response.ok);
 
     // If the response is not OK, throw an error to trigger retry
     if (!response.ok) {
+      console.log("Response.ok is not true", response);
+
       throw new Error(`Request failed with status ${response.status}`);
     }
 
@@ -18,7 +21,7 @@ async function fetchWithRetry(url: string, options = {}, retries = 5) {
     return response.json(); // or return response.text(), response.blob(), etc., based on your needs
   } catch (error) {
     if (retries > 0) {
-      console.warn(`Retrying... (${retries} retries left)`);
+      console.warn(`Retrying... (${retries} retries left) and url is ${url}`);
 
       // Wait for the specified delay before retrying
       await new Promise((resolve) => setTimeout(resolve, 1000));

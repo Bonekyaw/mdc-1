@@ -67,7 +67,7 @@ export default function HomeScreen() {
   if (categories.length == 0) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Network Connection Failed!</Text>
+        <Text>Data request has failed!</Text>
         <Pressable
           onPress={() => dispatch(fetchRequiredInfo())}
           style={styles.btnError}
@@ -82,7 +82,10 @@ export default function HomeScreen() {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text>Network Connection Failed!</Text>
-        <Pressable onPress={() => dispatch(fetchProducts())} style={styles.btnError}>
+        <Pressable
+          onPress={() => dispatch(fetchProducts())}
+          style={styles.btnError}
+        >
           <Text>Try again</Text>
         </Pressable>
       </View>
@@ -163,7 +166,11 @@ export default function HomeScreen() {
             data={productLists}
             horizontal
             renderItem={({ item }) => (
-              <Product {...item} onCall={() => saveProductToRedux(item.id)} onAdd={() => addToFavourite(item)}/>
+              <Product
+                {...item}
+                onCall={() => saveProductToRedux(item.id)}
+                onAdd={() => addToFavourite(item)}
+              />
             )}
             estimatedItemSize={80}
             showsHorizontalScrollIndicator={false}
@@ -173,7 +180,11 @@ export default function HomeScreen() {
             data={productLists}
             horizontal
             renderItem={({ item }) => (
-              <Product {...item} onCall={() => saveProductToRedux(item.id)} onAdd={() => addToFavourite(item)}/>
+              <Product
+                {...item}
+                onCall={() => saveProductToRedux(item.id)}
+                onAdd={() => addToFavourite(item)}
+              />
             )}
             estimatedItemSize={80}
             showsHorizontalScrollIndicator={false}
@@ -205,7 +216,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     paddingVertical: 5,
     paddingHorizontal: 10,
-    borderColor: 'black',
+    borderColor: "black",
     borderWidth: 0.5,
     borderRadius: 5,
   },
