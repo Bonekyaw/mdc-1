@@ -3,6 +3,34 @@ import type { FetchArgs } from "@reduxjs/toolkit/query";
 import { API_URL } from "@/config";
 
 // import { RootState } from "@/providers/redux/store";
+// import type {
+//   BaseQueryFn,
+//   FetchArgs,
+//   FetchBaseQueryError,
+// } from "@reduxjs/toolkit/query";
+// import { tokenReceived, loggedOut } from "./authSlice";
+
+// const baseQuery = fetchBaseQuery({ baseUrl: API_URL });
+// const baseQueryWithReauth: BaseQueryFn<
+//   string | FetchArgs,
+//   unknown,
+//   FetchBaseQueryError
+// > = async (args, api, extraOptions) => {
+//   let result = await baseQuery(args, api, extraOptions);
+//   if (result.error && result.error.status === 401) {
+//     // try to get a new token
+//     const refreshResult = await baseQuery("/refreshToken", api, extraOptions);
+//     if (refreshResult.data) {
+//       // store the new token
+//       api.dispatch(tokenReceived(refreshResult.data));
+//       // retry the initial query
+//       result = await baseQuery(args, api, extraOptions);
+//     } else {
+//       api.dispatch(loggedOut());
+//     }
+//   }
+//   return result;
+// };
 
 // maxRetries: 5 is the default, and can be omitted. Shown for documentation purposes.
 
