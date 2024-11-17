@@ -26,6 +26,9 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       extraOptions: { maxRetries: 8 }, // Override
       transformResponse: (responseData: UserType[]) => {
         console.log("Fetching All users --------");
+        if (!Array.isArray(responseData)) {
+          return usersAdapter.setAll(initialState, []);
+        }
         // console.log("Response User --------", responseData);
         // const loadedUsers = responseData.map((user: UserType) => {
         //   return user;
